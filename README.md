@@ -28,8 +28,8 @@ Ya need docker
 
 ## Installation Docker
 1. Make any changes you need to like: setting your interface to dark mode or light mode in the startapp.sh file or add mods to the mods folder etc.
-2. `docker build -t victim/pokete .`
-3. `docker run --name=poketeweb -d -p 5800:5800 -v /path/to/your/data:/app:rw victim/pokete`
+2. `docker build -t victim/poketeweb .`
+3. `docker run --name=poketeweb -d -p 5800:5800 victim/poketeweb`
 4. Go to your web browser of choice and head to: http://*YOUR-IP-HERE*:5800 OR http://localhost:5800
 
 ## How to play?
@@ -50,7 +50,7 @@ For additional information you can see [wiki](wiki.md) or
 Mods can be written to extend Pokete. To load a mod, the mod has  to be placed in `mods` and mods have to be enabled in the menu.
 For an example mod see [example.py](mods/example.py).
 
-add your mod before building the docker image - if you already built then you need to rebuild - ya saved your data right?
+add your mod before building the docker image - if you already built then you need to rebuild
 
 ## Tips
 - In conversations you can very easily skip the text printing by pressing any key
