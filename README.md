@@ -29,7 +29,7 @@ Ya need docker
 ## Installation Docker
 1. Make any changes you need to like: setting your interface to dark mode or light mode in the startapp.sh file or add mods to the mods folder etc.
 2. `docker build -t victim/pokete .`
-3. `docker run --name=poketeweb -d -p 5800:5800 -v /path/to/your/data:/app:rw`
+3. `docker run --name=poketeweb -d -p 5800:5800 -v /path/to/your/data:/app:rw victim/pokete`
 4. Go to your web browser of choice and head to: http://*YOUR-IP-HERE*:5800 OR http://localhost:5800
 
 ## How to play?
