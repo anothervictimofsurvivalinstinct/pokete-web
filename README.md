@@ -92,7 +92,7 @@ Leave an issue here if you're having a problem with the *Docker* image. If you'r
 
 ## Known Issues
 
-if you start a battle and return to the overworld the screen size of the game will be tiny - i'm looking into this, pretty sure it has to do with the over rendering of the map when using larger screen sizes
+None... so far.
 
 ## Important note
 This is meant to be kept local. Do not expose this to the internet... like at all. Use a vpn to access if it's so important 
