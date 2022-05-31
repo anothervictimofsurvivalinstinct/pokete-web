@@ -50,7 +50,7 @@ For additional information you can see [wiki](wiki.md) or
 Mods can be written to extend Pokete. To load a mod, the mod has  to be placed in `mods` and mods have to be enabled in the menu.
 For an example mod see [example.py](mods/example.py).
 
-add your mod before building the docker image - if you already built then you need to rebuild - ya saved your data right?
+add your mod before building the docker image - if you already built then you need to rebuild
 
 ## Tips
 - In conversations you can very easily skip the text printing by pressing any key
