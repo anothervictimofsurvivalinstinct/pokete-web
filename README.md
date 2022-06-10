@@ -23,6 +23,25 @@ Pokete is a small terminal based game in the style of a very popular and old gam
 
 This is just an addition to https://github.com/lxgr-linux/pokete making it accessible over your local network so you can play it from anywhere
 
+## Installation
+For Linux just do this:
+```shell
+# pip install scrap_engine
+$ git clone https://github.com/lxgr-linux/pokete.git
+$ ./pokete/pokete.py
+```
+
+You can also install it from the AUR:
+```shell
+$ buildaur -S pokete-git
+```
+
+Or you can just run the AppImage from tge release page.
+
+NOTE: In that case you first have to create the `~/.cache/pokete/` folder.
+
+For Windows and OSX:
+
 ## Dependencies
 Ya need docker
 

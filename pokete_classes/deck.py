@@ -1,6 +1,8 @@
-import time
+"""The Deck shows all Poketes a player owns"""
+
 import scrap_engine as se
-import pokete_classes.detail as detail
+from pokete_classes import detail
+import pokete_classes.game_map as gm
 from .event import _ev
 from .input import ask_bool
 from .loops import std_loop
@@ -14,8 +16,8 @@ class Deck(detail.Informer):
     """Deck to see Poketes in"""
 
     def __init__(self, height, width, figure, abb_funcs):
-        self.map = se.Map(height, width, " ")
-        self.submap = se.Submap(self.map, 0, 0, height=height, width=width)
+        self.map = gm.GameMap(height, width)
+        self.submap = gm.GameSubmap(self.map, 0, 0, height, width, "decksubmap")
         self.exit_label = se.Text("1: Exit  ")
         self.move_label = se.Text("2: Move    ")
         self.move_free = se.Text("3: Free")

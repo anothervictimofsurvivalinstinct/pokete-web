@@ -1,16 +1,20 @@
+"""Standardized loops components"""
+
 import time
-from pokete_classes.event import _ev
-from pokete_classes.notify import notifier
 import release
+from .event import _ev
+from .notify import notifier
 
 
-def easy_exit_loop():
-    """Loops until q or Esc are pressed"""
+def easy_exit_loop(on_mvmp=True):
+    """Loops until q or Esc are pressed
+    ARGS:
+        on_mvmp: Indicates if the loop is executed on movemap"""
     while True:
         if _ev.get() in ["'q'", "Key.esc"]:
             _ev.clear()
             return
-        std_loop()
+        std_loop(on_mvmp)
 
 
 def std_loop(on_mvmp=True, pevm=None):

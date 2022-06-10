@@ -1,10 +1,11 @@
 """Contains just some small classes"""
 
 import scrap_engine as se
+import pokete_classes.game_map as gm
 from .weather import Weather
 
 
-class PlayMap(se.Map):
+class PlayMap(gm.GameMap):
     """Map the actual player moves on and contains buildings etc
     ARGS:
         height: The maps height
@@ -19,12 +20,12 @@ class PlayMap(se.Map):
     def __init__(self, height=se.screen_height - 1, width=se.screen_width,
                  trainers=None, name="", pretty_name="", poke_args=None,
                  w_poke_args=None, extra_actions=None, weather=None):
-        super().__init__(height=height, width=width, background=" ")
+        super().__init__(height, width, name=name)
         self.trainers = trainers
-        self.name = name
         self.pretty_name = pretty_name
         self.poke_args = poke_args
         self.w_poke_args = w_poke_args
+        self.registry = {}
         if self.trainers is None:
             self.trainers = []
         if self.poke_args is None:
@@ -35,6 +36,19 @@ class PlayMap(se.Map):
         self.weather = None
         if weather is not None:
             self.weather = Weather(weather)
+
+    def register_obj(self, name, obj):
+        """Adds an object to the registry
+        ARGS:
+            name: Name in registry
+            obj: Object"""
+        self.registry[name] = obj
+
+    def get_obj(self, name):
+        """Gets and object from the registry
+        ARGS:
+            name: Name in registry"""
+        return self.registry.get(name, None)
 
     def extra_actions(self):
         """Executes the extra action"""
