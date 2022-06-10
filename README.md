@@ -42,6 +42,17 @@ NOTE: In that case you first have to create the `~/.cache/pokete/` folder.
 
 For Windows and OSX:
 
+```shell
+git clone https://github.com/lxgr-linux/pokete.git
+pip install scrap_engine
+pip install pynput
+```
+To run just execute `pokete.py`.
+
+NOTE: In that case you first have to create the `~/.cache/pokete/` folder.
+
+For Windows and OSX:
+
 ## Dependencies
 Ya need docker
 
