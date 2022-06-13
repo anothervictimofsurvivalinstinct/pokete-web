@@ -23,6 +23,11 @@ Pokete is a small terminal based game in the style of a very popular and old gam
 
 This is just an addition to https://github.com/lxgr-linux/pokete making it accessible over your local network so you can play it from anywhere
 
+## Upcoming
+
+Raspberry pi compatible image
+Fix saving, as currently it only follows the container
+
 ## Dependencies
 Ya need docker
 
@@ -86,7 +91,7 @@ to regenerate the wiki and adding them to it.
 ## Trouble shooting
 If you're experiencing problems on Japanese systems take a look at [this](https://gist.github.com/z80oolong/c7523367b798bdda094f859342f4c8be).
 
-if you exit the game on for the context menu it will shutdown the docker container and it will need to be restarted
+if you exit the game from the context menu it will shutdown the docker container and it will need to be restarted
 
 Leave an issue here if you're having a problem with the *Docker* image. If you're having issues with the game see the upstream: https://github.com/lxgr-linux/pokete
 
