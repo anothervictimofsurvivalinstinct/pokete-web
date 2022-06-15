@@ -44,6 +44,8 @@ Go to your web browser of choice and head to: http://*YOUR-IP-HERE*:5800 OR http
 
 See upstream if you need more: https://github.com/lxgr-linux/pokete
 
+See [How to play](HowToPlay.md).
+
 ## Game depth
 Not only are there Poketes that are stronger than others, but also Poketes with different types, which are effective against some types and ineffective against others.
 
@@ -53,17 +55,16 @@ For additional information you can see [wiki](wiki.md) or
 [the multi-page wiki](https://lxgr-linux.github.io/pokete/wiki-multi).
 
 ## Mods
-Mods can be written to extend Pokete. To load a mod, the mod has  to be placed in `mods` and mods have to be enabled in the menu.
+Mods can be written to extend Pokete. To load a mod, the mod has to be placed in `mods` and mods have to be enabled in the menu.
 For an example mod see [example.py](mods/example.py).
 
 add your mod before building the docker image - if you already built then you need to rebuild
 
 ## Tips
 - In conversations you can very easily skip the text printing by pressing any key
-- When you want to see the next text in a conversation, also just press any key
-- Don't play on full-screen, the game then starts to be overseeable
-- Don't be offended by the other trainers, they may swear at you
-
+- When you want to see the next text in a conversation: also just press any key
+- Don't play on full-screen; the game then starts to be overseeable
+- Don't be offended by the other trainers; they may swear at you
 
 ## Documentation
 - [Documentation for pokete_classes](https://lxgr-linux.github.io/pokete/doc/pokete_classes/index.html)
