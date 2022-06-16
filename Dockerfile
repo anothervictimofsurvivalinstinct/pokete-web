@@ -6,18 +6,12 @@ WORKDIR /app
 # Define mountable directories.
 VOLUME /app/data
 
-#install python pre reqs
-RUN \
-    apk add --no-cache python3 py3-pip
-
 # Install extra packages.
 RUN \
     add-pkg \
     	xterm \
-        desktop-file-utils \
-        adwaita-icon-theme \
-        ttf-dejavu \
-        ffmpeg-libs \
+        python3 \
+        py3-pip \
         # The following package is used to send key presses to the X process.
         xdotool
 
