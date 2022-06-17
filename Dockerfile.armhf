@@ -1,0 +1,42 @@
+# Pull base image.
+FROM jlesage/baseimage-gui:alpine-3.15-v4.0.0-pre.4
+
+# Define working directory.
+WORKDIR /app
+# Define mountable directories.
+VOLUME /app/data
+
+# Install extra packages.
+RUN \
+    add-pkg \
+        xterm \
+        python3 \
+        py3-pip \
+        font-misc-misc \
+        # The following package is used to send key presses to the X process.
+        xdotool
+
+#install scrap_engine pre req
+RUN python3 -m pip install scrap_engine
+# Set environment variables.
+ENV APP_NAME="PoketeWeb"
+ENV UNAME abc
+ENV UID 1000
+ENV GID 1000
+RUN groupadd -g $GID -o $UNAME
+RUN useradd -m -u $UID -g $GID -o -s /bin/sh $UNAME
+
+RUN chown -R abc:abc /app
+
+COPY startapp.sh /startapp.sh
+RUN chmod +x /startapp.sh
+# Add files.
+COPY --chown=abc:abc . .
+# Metadata.
+#LABEL \
+#      org.label-schema.name="poketeweb" \
+#      org.label-schema.description="Docker container for poketeweb" \
+#      org.label-schema.version="$DOCKER_IMAGE_VERSION" \
+#      org.label-schema.vcs-url="https://github.com/anothervictimofsurvivalinstinct/pokete-web" \
+#      org.label-schema.schema-version="1.0"
+  
