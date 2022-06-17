@@ -1400,7 +1400,8 @@ if __name__ == "__main__":
     width, height = tss()
 
     # Home global
-    HOME = str(Path.home())
+    # changing to fit with Docker container
+    HOME = str('/app/data/')
 
     # loading screen
     loading_screen = LoadingScreen(VERSION, CODENAME)
