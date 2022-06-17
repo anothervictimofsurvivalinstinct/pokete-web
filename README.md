@@ -40,7 +40,7 @@ For raspberry pi you will need to specify the armhf file:
 
 ### Known Issues
 
-None... so far.
+For the raspberry pi image the window won't be centered on the web page you can move the window around to place it where you need it.
 
 ### Important notes
 This is meant to be kept local. Do not expose this to the internet... like at all. Use a vpn to access if it's so important 
