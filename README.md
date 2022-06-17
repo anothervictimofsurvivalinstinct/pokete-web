@@ -21,6 +21,8 @@
 ## What is it?
 Pokete is a small terminal based game in the style of a very popular and old game by Gamefreak.
 
+This is just an addition to https://github.com/lxgr-linux/pokete making it accessible over your local network so you can play it from anywhere
+
 ## Docker Installation:
 
 ### Dependencies
@@ -31,14 +33,23 @@ Ya need docker
 3. `docker run --name=poketeweb -d -p 5800:5800 -v /path/to/your/data:/app/data victim/poketeweb`
 4. Go to your web browser of choice and head to: http://*YOUR-IP-HERE*:5800 OR http://localhost:5800
 
+For raspberry pi you will need to specify the armhf file:
+
+1. `docker build -f Dockerfile.armhf -t victim/poketeweb .`
+2. Continue like above
+
 ### Known Issues
 
 None... so far.
 
-### Important note
+### Important notes
 This is meant to be kept local. Do not expose this to the internet... like at all. Use a vpn to access if it's so important 
 
 Add your mod before building the docker image - if you already built then you need to rebuild
+
+If you exit the game from the context menu it will shutdown the docker container and it will need to be restarted
+
+Leave an issue here if you're having a problem with the *Docker* image. If you're having issues with the game see the upstream: https://github.com/lxgr-linux/pokete
 
 ## Installation
 For Linux just do this:
