@@ -28,6 +28,8 @@ This is just an addition to https://github.com/lxgr-linux/pokete making it acces
 ### Dependencies
 Ya need docker
 
+Build the image:
+
 1. Make any changes you need to like: setting your interface to dark mode or light mode in the startapp.sh file or add mods to the mods folder etc.
 2. `docker build -t victim/poketeweb .`
 3. `docker run --name=poketeweb -d -p 5800:5800 -v /path/to/your/data:/app/data victim/poketeweb`
@@ -37,6 +39,10 @@ For raspberry pi you will need to specify the armhf file:
 
 1. `docker build -f Dockerfile.armhf -t victim/poketeweb .`
 2. Continue like above
+
+### Upcoming
+
+slimmed down docker images
 
 ### Known Issues
 
