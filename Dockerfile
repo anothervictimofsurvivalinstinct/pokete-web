@@ -11,7 +11,14 @@ RUN \
     add-pkg \
     	xterm \
         python3 \
+        python3-dev \
         py3-pip \
+        py3-cairo \
+        py3-gst \
+        gobject-introspection-dev \
+        cairo-dev \
+        build-base \
+        #py3-gobject3 \
         # The following package is used to send key presses to the X process.
         xdotool
 
@@ -25,7 +32,7 @@ RUN \
         /etc/xdg/openbox/rc.xml
 
 #install scrap_engine pre req
-RUN python3 -m pip install scrap_engine
+RUN python3 -m pip install wheel scrap_engine playsound pygobject
 
 # Set environment variables.
 ENV APP_NAME="PoketeWeb"
