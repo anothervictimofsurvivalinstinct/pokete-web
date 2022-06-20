@@ -10,12 +10,10 @@ VOLUME /app/data
 RUN \
     add-pkg \
         xterm \
-        python3 \
         py3-pip \
         font-misc-misc \
         # The following package is used to send key presses to the X process
         python3-dev \
-        py3-cairo \
         py3-gst \
         gobject-introspection-dev \
         cairo-dev \
@@ -25,6 +23,14 @@ RUN \
         xdotool
 #install scrap_engine pre req
 RUN python3 -m pip install wheel scrap_engine playsound pygobject
+
+RUN \
+    del-pkg \
+        gobject-introspection-dev \
+        py3-pip \
+        cairo-dev \
+        build-base 
+
 # Set environment variables.
 ENV APP_NAME="PoketeWeb"
 ENV UNAME abc
