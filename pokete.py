@@ -752,7 +752,8 @@ def save():
         "pokete_care": pokete_care.dict(),
         "time": timer.time.time
     }
-    with open(SAVEPATH / "pokete.json", "w+") as file:
+    #changed back due to correct savepath
+    with open(HOME+SAVEPATH / "pokete.json", "w+") as file:
         # writes the data to the save file in a nice format
         json.dump(_si, file, indent=4)
     logging.info("[General] Saved")
@@ -762,6 +763,7 @@ def read_save():
     """Reads from savefile
     RETURNS:
         session_info dict"""
+    #changed back due to correct savepath
     Path(HOME+SAVEPATH).mkdir(parents=True, exist_ok=True)
     # Default test session_info
     _si = {
@@ -791,7 +793,7 @@ def read_save():
         },
         "time": 0
     }
-
+    #changed back due to correct savepath
     if (not os.path.exists(HOME + SAVEPATH + "/pokete.json")
         and os.path.exists(HOME + SAVEPATH + "/pokete.py")):
         l_dict = {}
