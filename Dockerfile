@@ -10,12 +10,12 @@ VOLUME /app/data
 RUN \
     add-pkg \
     	xterm \
-        python3-dev \
+        #python3-dev \
         py3-pip \
-        py3-gst \
-        gobject-introspection-dev \
-        cairo-dev \
-        build-base \
+        #py3-gst \
+        #gobject-introspection-dev \
+        #cairo-dev \
+        #build-base \
         # The following package is used to send key presses to the X process.
         xdotool
 
@@ -33,10 +33,10 @@ RUN python3 -m pip install wheel scrap_engine playsound pygobject
 
 RUN \
     del-pkg \
-        gobject-introspection-dev \
+        #gobject-introspection-dev \
         py3-pip \
-        cairo-dev \
-        build-base 
+        #cairo-dev \
+        #build-base 
 
 # Set environment variables.
 ENV APP_NAME="PoketeWeb"
@@ -49,7 +49,7 @@ RUN useradd -m -u $UID -g $GID -o -s /bin/sh $UNAME
 RUN chown -R abc:abc /app
 
 # Add files.
-COPY . .
+COPY --chown=abc:abc . .
 COPY startapp.sh /startapp.sh
 
 # Metadata.
