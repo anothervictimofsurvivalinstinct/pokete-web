@@ -34,7 +34,7 @@ RUN python3 -m pip install wheel scrap_engine playsound pygobject
 RUN \
     del-pkg \
         #gobject-introspection-dev \
-        py3-pip \
+        py3-pip 
         #cairo-dev \
         #build-base 
 
