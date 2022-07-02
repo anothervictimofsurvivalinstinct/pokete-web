@@ -21,42 +21,6 @@
 ## What is it?
 Pokete is a small terminal based game in the style of a very popular and old game by Gamefreak.
 
-This is just an addition to https://github.com/lxgr-linux/pokete making it accessible over your local network so you can play it from anywhere
-
-## Docker Installation:
-
-### Dependencies
-Ya need docker
-
-Build the image:
-
-1. Make any changes you need to like: setting your interface to dark mode or light mode in the startapp.sh file or add mods to the mods folder etc.
-2. `docker build -t victim/poketeweb .`
-3. `docker run --name=poketeweb -d -p 5800:5800 -v /path/to/your/data:/app/data victim/poketeweb`
-4. Go to your web browser of choice and head to: http://*YOUR-IP-HERE*:5800 OR http://localhost:5800
-
-For raspberry pi you will need to specify the armhf file:
-
-1. `docker build -f Dockerfile.armhf -t victim/poketeweb .`
-2. Continue like above
-
-### Upcoming
-
-slimmed down docker images
-
-### Known Issues
-
-For the raspberry pi image the window won't be centered on the web page you can move the window around to place it where you need it.
-
-### Important notes
-This is meant to be kept local. Do not expose this to the internet... like at all. Use a vpn to access if it's so important 
-
-Add your mod before building the docker image - if you already built then you need to rebuild
-
-If you exit the game from the context menu it will shutdown the docker container and it will need to be restarted
-
-Leave an issue here if you're having a problem with the *Docker* image. If you're having issues with the game see the upstream: https://github.com/lxgr-linux/pokete
-
 ## Installation
 For Linux, run this:
 ```shell
@@ -81,6 +45,18 @@ git clone https://github.com/lxgr-linux/pokete.git
 pip install scrap_engine pynput playsound pygobject
 ```
 To run just execute `pokete.py`.
+
+## Docker Installation:
+
+Choose which image you want: sound or no sound - no sound being a smaller less complicated image
+
+### SOUND
+1. `docker build -t pokete .`
+2. `docker run -ti --rm --device /dev/snd -v /path/to/savegame:/data pokete`
+
+### NO SOUND
+1. `docker build -f Dockerfile.nosound -t pokete .`
+2. `docker run -ti --rm -v /path/to/savegame:/data pokete`
 
 ## Usage
 The game can be run normally without supplying any options.
