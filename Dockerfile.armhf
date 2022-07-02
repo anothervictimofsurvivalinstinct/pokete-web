@@ -12,7 +12,7 @@ RUN \
         xterm \
         py3-pip \
         font-misc-misc \
-        #python3-dev \
+        python3-dev \
         #py3-gst \
         #gobject-introspection-dev \
         #cairo-dev \
