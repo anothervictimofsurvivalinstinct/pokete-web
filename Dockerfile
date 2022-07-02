@@ -10,7 +10,7 @@ VOLUME /app/data
 RUN \
     add-pkg \
     	xterm \
-        #python3-dev \
+        python3-dev \
         py3-pip \
         #py3-gst \
         #gobject-introspection-dev \
