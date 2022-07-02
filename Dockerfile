@@ -1,62 +1,33 @@
-# Pull base image.
-FROM jlesage/baseimage-gui:alpine-3.15-v3.5.8
+FROM alpine:3.15 AS compile-image
 
-# Define working directory.
-WORKDIR /app
-# Define mountable directories.
-VOLUME /app/data
+#compile and lib pre reqs
+RUN apk add \
+    python3-dev \
+    py3-pip \
+    py3-gst \
+    gobject-introspection-dev \
+    cairo-dev \
+    build-base 
 
-# Install extra packages.
-RUN \
-    add-pkg \
-    	xterm \
-        #python3-dev \
-        py3-pip \
-        #py3-gst \
-        #gobject-introspection-dev \
-        #cairo-dev \
-        #build-base \
-        # The following package is used to send key presses to the X process.
-        xdotool
+#install to root user .local
+RUN python3 -m pip install --user scrap_engine playsound pygobject 
 
-# Adjust the openbox config.
-RUN \
-    # Maximize only the main window.
-    sed-patch 's/<application type="normal">/<application type="normal" title="PoketeWeb">/' \
-        /etc/xdg/openbox/rc.xml && \
-    # Make sure the main window is always in the background.
-    sed-patch '/<application type="normal" title="PoketeWeb">/a \    <layer>below</layer>' \
-        /etc/xdg/openbox/rc.xml
+From alpine:3.15
 
-#install scrap_engine pre req
-RUN python3 -m pip install wheel scrap_engine playsound pygobject
+RUN apk add --no-cache \
+    python3-dev \
+    py3-gst 
 
-RUN \
-    del-pkg \
-        #gobject-introspection-dev \
-        py3-pip 
-        #cairo-dev \
-        #build-base 
+#copy python build from previous step    
+COPY --from=compile-image /root/.local /root/.local
+ENV PATH="/root/.local/bin:$PATH"
 
-# Set environment variables.
-ENV APP_NAME="PoketeWeb"
-ENV UNAME abc
-ENV UID 1000
-ENV GID 1000
-RUN groupadd -g $GID -o $UNAME
-RUN useradd -m -u $UID -g $GID -o -s /bin/sh $UNAME
+#make data dir more user friendly
+RUN mkdir -p /root/.cache/pokete && \
+    ln -s /root/.cache/pokete /data
 
-RUN chown -R abc:abc /app
+COPY . .
 
-# Add files.
-COPY --chown=abc:abc . .
-COPY startapp.sh /startapp.sh
+VOLUME ["/data"]
 
-# Metadata.
-#LABEL \
-#      org.label-schema.name="poketeweb" \
-#      org.label-schema.description="Docker container for poketeweb" \
-#      org.label-schema.version="$DOCKER_IMAGE_VERSION" \
-#      org.label-schema.vcs-url="https://github.com/anothervictimofsurvivalinstinct/pokete-web" \
-#      org.label-schema.schema-version="1.0"
-         
+CMD [ "python", "./pokete.py" ]
