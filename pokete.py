@@ -309,7 +309,7 @@ class CenterMap(PlayMap):
 
     def __init__(self, _he, _wi):
         super().__init__(_he, _wi, name="centermap",
-                         pretty_name="Pokete-Center", song="Map.wav")
+                         pretty_name="Pokete-Center", song="Map.mp3")
         self.inner = se.Text(""" ________________
  |______________|
  |     |a |     |
@@ -342,7 +342,7 @@ class ShopMap(PlayMap):
 
     def __init__(self, _he, _wi):
         super().__init__(_he, _wi, name="shopmap",
-                         pretty_name="Pokete-Shop", song="Map.wav")
+                         pretty_name="Pokete-Shop", song="Map.mp3")
         self.inner = se.Text(""" __________________
  |________________|
  |      |a |      |
@@ -806,16 +806,9 @@ def read_save():
     return _si
 
 
-def on_press(key):
-    """Sets the input to either a character like 'a' or '1', or Key.enter, Key.backspace, Key.space, Key.esc, exit
-    ARGS:
-        key: Key object _ev is set from"""
-    _ev.set(str(key).strip("'"))
-
-
 def reset_terminal():
     """Resets the terminals state"""
-    if sys.platform == "linux" and not force_pynput:
+    if sys.platform == "linux":
         termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
 
 
@@ -1196,6 +1189,11 @@ def main():
     autosaving.start()
 
     check_version(session_info)
+    ver_change = check_version(session_info)
+    # hotkeys
+    hotkeys_from_save(session_info.get("hotkeys", {}),
+                      loading_screen.map, ver_change)
+
     if figure.name == "DEFAULT":
         intro()
     game.game(figure.map)
@@ -1386,9 +1384,30 @@ def map_additions():
 # Actual code execution
 #######################
 if __name__ == "__main__":
-    do_logging, load_mods, force_pynput = parse_args(sys.argv)
+    do_logging, load_mods = parse_args(sys.argv)
     # deciding on wich input to use
-    if sys.platform == "linux" and not force_pynput:
+    if sys.platform == "win32":
+        import msvcrt
+
+
+        def recogniser():
+            """Gets keyboard input from msvcrt, the Microsoft Visual C++ Runtime"""
+            while True:
+                if msvcrt.kbhit():
+                    char = msvcrt.getwch()
+                    _ev.set(
+                        {
+                            ord(char): f"{char.rstrip()}",
+                            13: "Key.enter",
+                            127: "Key.backspace",
+                            8: "Key.backspace",
+                            32: "Key.space",
+                            27: "Key.esc",
+                            3: "exit",
+                        }[ord(char)]
+                    )
+
+    else:
         import tty
         import termios
         import select
@@ -1420,15 +1439,6 @@ if __name__ == "__main__":
                     )
                     if ord(char) == 3:
                         reset_terminal()
-    else:
-        from pynput.keyboard import Listener
-
-
-        def recogniser():
-            """Gets keyboard input from pynput"""
-            while True:
-                with Listener(on_press=on_press) as listener:
-                    listener.join()
 
 
     print("\033[?1049h")

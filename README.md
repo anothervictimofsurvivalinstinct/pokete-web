@@ -58,9 +58,9 @@ If you exit the game from the context menu it will shutdown the docker container
 Leave an issue here if you're having a problem with the *Docker* image. If you're having issues with the game see the upstream: https://github.com/lxgr-linux/pokete
 
 ## Installation
-For Linux, run this:
+For Linux, BSD etc. just do this:
 ```shell
-# pip install scrap_engine playsound pygobject
+# pip install scrap_engine
 $ git clone https://github.com/lxgr-linux/pokete.git
 $ ./pokete/pokete.py
 ```
@@ -74,13 +74,24 @@ Or you can just run the AppImage from the release page.
 
 NOTE: In that case you first have to create the `~/.cache/pokete/` folder.
 
-For Windows and OS X:
+For OSX:
+```shell
+# pip install scrap_engine
+$ git clone https://github.com/lxgr-linux/pokete.git
+$ ./pokete/pokete.py
+```
+
+For Windows:
+
+Some windows antivirus may flag the `libplaysound.dll` as malicious. If pokete crashes, please make sure that the .dll exists and is **not** in quarantine!
 
 ```shell
 git clone https://github.com/lxgr-linux/pokete.git
-pip install scrap_engine pynput playsound pygobject
+pip install scrap_engine
 ```
 To run just execute `pokete.py`.
+
+If you have problems with your ARCH you maybe need to rebuild the audio module, see [here](playsound/README.md).
 
 ## Usage
 The game can be run normally without supplying any options.
@@ -142,7 +153,7 @@ For an example mod see [example.py](mods/example.py).
 - [ ] More maps
 - [x] Types for attacks and Poketes
 - [x] Evolving
-- [ ] More than one Pokete for trainers
+- [x] More than one Pokete for trainers
 - [x] Coloured Poketes
 - [x] A store to buy Poketeballs
 - [x] Potions

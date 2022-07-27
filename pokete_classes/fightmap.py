@@ -239,13 +239,25 @@ class FightMap(gm.GameMap):
         ARGS:
             figure: The players provider
             enem: The enemys provider"""
+        quick_attacks = [
+            Action.QUICK_ATC_1, Action.QUICK_ATC_2,
+            Action.QUICK_ATC_3, Action.QUICK_ATC_4
+        ][:len(figure.curr.attack_obs)]
         self.outp.append(se.Text(("\n" if "\n" not in self.outp.text
                                           else "") +
                                          "What do you want to do?",
                                          state="float"))
         while True:  # Inputloop for general options
             action = get_action()
-            if action.triggers(Action.CHOOSE_ATTACK, Action.ACCEPT):
+            if action.triggers(*quick_attacks):
+                attack = figure.curr.attack_obs[
+                    quick_attacks.index(
+                        next(i for i in action if i in quick_attacks)
+                    )
+                ]
+                if attack.ap > 0:
+                    return attack
+            elif action.triggers(Action.CHOOSE_ATTACK, Action.ACCEPT):
                 attack = self.get_attack(figure.curr.attack_obs)
                 if attack != "":
                     return attack
@@ -259,7 +271,7 @@ class FightMap(gm.GameMap):
                     self.outp.outp("You failed to run away!")
                     time.sleep(SPEED_OF_TIME * 1)
                     return ""
-                audio.switch("xDeviruchi - Decisive Battle (End).wav")
+                audio.switch("xDeviruchi - Decisive Battle (End).mp3")
                 self.outp.outp("You ran away!")
                 time.sleep(SPEED_OF_TIME * 2)
                 self.clean_up(figure, enem)
@@ -302,7 +314,7 @@ class FightMap(gm.GameMap):
             providers
         RETURNS:
             Provider that won the fight"""
-        audio.switch("xDeviruchi - Decisive Battle (Loop).wav")
+        audio.switch("xDeviruchi - Decisive Battle (Loop).mp3")
         index = 0
         logging.info(
             "[Fight] Started between %s",
@@ -405,7 +417,7 @@ class FightMap(gm.GameMap):
                 else:
                     break
             index += 1
-        audio.switch("xDeviruchi - Decisive Battle (End).wav")
+        audio.switch("xDeviruchi - Decisive Battle (End).mp3")
         time.sleep(SPEED_OF_TIME * 1)
         _xp = sum(
             poke.lose_xp + max(0, poke.lvl() - winner.curr.lvl())
@@ -506,7 +518,7 @@ class FightItems:
                           weights=[(enem.curr.full_hp / enem.curr.hp)
                                    * chance + catch_chance,
                                    enem.curr.full_hp], k=1)[0]:
-            audio.switch("xDeviruchi - Decisive Battle (End).wav")
+            audio.switch("xDeviruchi - Decisive Battle (End).mp3")
             obj.add_poke(enem.curr)
             fightmap.outp.outp(f"You caught {enem.curr.name}!")
             time.sleep(SPEED_OF_TIME * 2)
